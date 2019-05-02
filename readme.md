@@ -15,7 +15,7 @@ pip install MIMS
 Run the script setup.py found in the .zip file. 
 
 ## Usage
-
+On initialization, the login username and login password for all roles are "user" and "password" respectively. Initial use of the system requires changes to be made by the system administrator to add additional users.
 ```python
 python.exe main.py
 ```
