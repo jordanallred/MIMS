@@ -1,0 +1,81 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Button kivy.uix.button.Button
+#: import report_names ManageReports.report_names
+
+<Button>:
+    background_color: 0.8, 0.8, 1, 1
+
+<ListItemButton>:
+    selected_color: 0, 0.36, 0.64, 0.4
+    deselected_color: 0.8, 0.8, 1, 1
+
+<ManageReports>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.png"
+
+    orientation: "vertical"
+    name_text_input: name
+    date_text_input: date
+    reason_text_input: reason
+    symptoms_text_input: symptoms
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Label:
+            text: "Patient Name"
+        TextInput:
+            id: name
+        Label:
+            text: "Date"
+        TextInput:
+            id: date
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Label:
+            text: "Reason for Visit"
+        TextInput:
+            id: reason
+        Label:
+            text: "Symptom(s)"
+        TextInput:
+            id: symptoms
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            text: "Submit"
+            size_hint_x: 15
+            on_press: root.submit_report()
+        Button:
+            text: "Delete"
+            size_hint_x: 15
+            on_press: root.delete_report()
+        Button:
+            text: "Edit"
+            size_hint_x: 15
+            on_press: root.replace_report()
+
+
+    ListView:
+        id: patient_names_view
+        adapter: ListAdapter(data=report_names, cls=ListItemButton)
+
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        font_size: 18
+        Button:
+            text: "Log out"
+            on_press: root.logout()
+        Button:
+            text: "Cancel"
+            on_press: root.disconnect()

@@ -1,0 +1,66 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Button kivy.uix.button.Button
+#: import patient_names ManagePatients.patient_names
+
+<Button>:
+    background_color: 0.8, 0.8, 1, 1
+
+<ListItemButton>:
+    selected_color: 0, 0.36, 0.64, 0.4
+    deselected_color: 0.8, 0.8, 1, 1
+
+<ManagePatients>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.png"
+
+    orientation: "vertical"
+    name_text_input: name
+    patient_names: patient_names_view
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Label:
+            text: "Patient Name"
+        TextInput:
+            id: name
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            text: "Submit"
+            size_hint_x: 15
+            on_press: root.submit_patient()
+        Button:
+            text: "Delete"
+            size_hint_x: 15
+            on_press: root.delete_patient()
+        Button:
+            text: "Edit"
+            size_hint_x: 15
+            on_press: root.replace_patient()
+
+    # Define starting data and point to the ListItemButton
+    # in the Python code
+
+    ListView:
+        id: patient_names_view
+        adapter: ListAdapter(data=patient_names, cls=ListItemButton)
+
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        font_size: 18
+        Button:
+            text: "Log out"
+            on_press: root.logout()
+        Button:
+            text: "Cancel"
+            on_press: root.disconnect()

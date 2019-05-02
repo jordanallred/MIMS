@@ -1,0 +1,58 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Button kivy.uix.button.Button
+
+<Button>:
+    background_color: 0.8, 0.8, 1, 1
+
+<ListItemButton>:
+    selected_color: 0, 0.36, 0.64, 0.4
+    deselected_color: 0.8, 0.8, 1, 1
+
+<OrderItem>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.png"
+
+    orientation: "vertical"
+    service_text_input: service
+    quantity_text_input: quantity
+    padding: 25
+    spacing: 50
+
+    BoxLayout:
+        size_hint_y: 0.5
+        Spinner:
+            font_size: 28
+            id: service
+            text: 'Item'
+            values: ('Equipment', 'Tool', 'Test Kit', 'Compound')
+
+    BoxLayout:
+        spacing: 25
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: 0.25
+            Label:
+                text: "Quantity"
+            TextInput:
+                id: quantity
+
+        Button:
+            size_hint: (1, None)
+            size: (100, 44)
+            text: "Order"
+            on_press: root.order_service()
+
+    BoxLayout:
+        Button:
+            size_hint: (1, None)
+            size: (100, 44)
+            text: "Log out"
+            on_press: root.logout()
+        Button:
+            size_hint: (1, None)
+            size: (100, 44)
+            text: "Cancel"
+            on_press: root.disconnect()

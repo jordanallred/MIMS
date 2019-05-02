@@ -1,0 +1,77 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Button kivy.uix.button.Button
+#: import suspended_accounts CheckSecurity.suspended_accounts
+#: import total_attempts CheckSecurity.total_attempts
+
+<Button>:
+    background_color: 0.8, 0.8, 1, 1
+
+<ListItemButton>:
+    selected_color: 0, 0.36, 0.64, 0.4
+    deselected_color: 0.8, 0.8, 1, 1
+
+<CheckSecurity>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.png"
+
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    suspended_accounts: suspended_accounts_view
+    total_attempts: attempts
+
+    BoxLayout:
+        font_size: 18
+        orientation: "vertical"
+
+        Label:
+            font_size: 36
+            anchor_x: "center"
+            anchor_y: "center"
+            text: "Failed Login Attempts"
+
+        Label:
+            id: attempts
+            font_size: 22
+            text: "Total Login Attempts: " + total_attempts
+
+        Button:
+            text: "Reset Total Attempts"
+            size_hint: (1, 0.5)
+            on_press: root.reset_total()
+
+        Label:
+            font_size: 22
+            text: "User Login Attempts"
+
+        ListView:
+            id: suspended_accounts_view
+            adapter: ListAdapter(data=suspended_accounts, cls=ListItemButton)
+
+        Button:
+            text: "Reset User Attempts"
+            size_hint: (1, 0.5)
+            on_press: root.reset()
+
+        Button:
+            text: "Suspend User Account"
+            size_hint: (1, 0.5)
+            on_press: root.suspend()
+
+    # Define starting data and point to the ListItemButton
+    # in the Python code
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        font_size: 18
+        Button:
+            text: "Log out"
+            on_press: root.logout()
+        Button:
+            text: "Cancel"
+            on_press: root.disconnect()

@@ -1,0 +1,51 @@
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import Button kivy.uix.button.Button
+#: include ManageReportsManagement.kv
+#: include MakeSchedule.kv
+#: include OrderItem.kv
+#: include ManagePayments.kv
+
+<Button>:
+    background_color: 0.8, 0.8, 1, 1
+
+<ManagementStaff>:
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.png"
+
+    BoxLayout:
+        padding: 10
+        spacing: 10
+        orientation: "vertical"
+        Label:
+            font_size: 36
+            text: "Non-Medical Patient Interaction Staff Jobs"
+        Button:
+            text: "Make Schedule"
+            font_size: 32
+            on_press: root.make_schedule()
+        Button:
+            text: "Manage Reports"
+            font_size: 32
+            on_press: root.manage_reports()
+        Button:
+            text: "Manage Payments"
+            font_size: 32
+            on_press: root.manage_payments()
+        Button:
+            text: "Order Item"
+            font_size: 32
+            on_press: root.order_item()
+    BoxLayout:
+        orientation: "horizontal"
+        Button:
+            size_hint: (0.5, 0.25)
+            text: "Log Out"
+            font_size: 32
+            on_press: root.disconnect()

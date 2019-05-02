@@ -1,0 +1,87 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Button kivy.uix.button.Button
+#: import user_list ManageUsers.user_list
+
+<Button>:
+    background_color: 0.8, 0.8, 1, 1
+
+<ListItemButton>:
+    selected_color: 0, 0.36, 0.64, 0.4
+    deselected_color: 0.8, 0.8, 1, 1
+
+<ManageUsers>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.png"
+
+    orientation: "vertical"
+    id_text_input: id
+    password_text_input: password
+    name_text_input: name
+    role_text_input: role
+    user_list: user_list_view
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Label:
+            text: "ID"
+        TextInput:
+            id: id
+        Label:
+            text: "Password"
+        TextInput:
+            id: password
+        Label:
+            text: "Name"
+        TextInput:
+            id: name
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Spinner:
+            id: role
+            text: 'Role'
+            font_size: 20
+            values: ('Patient', 'System Administrator', 'Nurse', 'Medical Technician', 'Nurse Practitioner', 'Clerk', 'Accountant', 'Doctor', 'Pharmacist', 'President', 'Inventory Manager', 'Staff Manager', 'Department Head')
+
+
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            text: "Submit"
+            size_hint_x: 15
+            on_press: root.submit_student()
+        Button:
+            text: "Delete"
+            size_hint_x: 15
+            on_press: root.delete_student()
+        Button:
+            text: "Edit"
+            size_hint_x: 15
+            on_press: root.replace_student()
+
+    # Define starting data and point to the ListItemButton
+    # in the Python code
+
+    ListView:
+        id: user_list_view
+        adapter: ListAdapter(data=user_list, cls=ListItemButton)
+
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        font_size: 18
+        Button:
+            text: "Log out"
+            on_press: root.logout()
+        Button:
+            text: "Cancel"
+            on_press: root.disconnect()

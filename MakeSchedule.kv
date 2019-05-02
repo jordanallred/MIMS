@@ -1,0 +1,44 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import Button kivy.uix.button.Button
+
+<Button>:
+    background_color: 0.8, 0.8, 1, 1
+
+<ListItemButton>:
+    selected_color: 0, 0.36, 0.64, 0.4
+    deselected_color: 0.8, 0.8, 1, 1
+
+<MakeSchedule>:
+    name_text_input: ti
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.png"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding : 20, 20
+
+        BoxLayout:
+            orientation: "vertical"
+            padding : 20, 20
+
+            Button:
+                text: 'Show Calendar'
+                on_press: root.show_calendar()
+
+            TextInput:
+                id: ti
+
+            Button:
+                text: 'Update Schedule'
+                on_press: root.update_appointment()
+
+            Button:
+                text: 'Submit Schedule'
+                on_press: root.submit_appointment()
+
+<DatePicker>:
+    pHint: .5, .5
