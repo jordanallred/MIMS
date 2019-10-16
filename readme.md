@@ -4,7 +4,7 @@ MIMS is a Python library for implementing a Medical Information Management Syste
 
 ## Installation
 
-Download the .zip file and make sure to have Python 3 installed. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Download the .zip file and make sure to have Python 3 installed. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install MIMS.
 
 ```bash
 pip install MIMS
